@@ -16,7 +16,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Sucks, bugs, plug'n'play
+          Stacks, bugs, plug'n'play
         </a>
       </header>
     </div>
