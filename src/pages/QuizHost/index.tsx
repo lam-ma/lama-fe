@@ -6,11 +6,11 @@ import {useQuizHost} from "./useQuizHost";
 
 const Start = () => {
     let {quizId} = useParams<RouteQuizHostParams>();
-    const { quiz } = useQuizHost({ quizId });
+    const { startQuizHandler } = useQuizHost({ quizId });
 
     return (
         <Container>
-            <Button>Start game {quizId}</Button>
+            <Button  onClick={startQuizHandler}>Start game {quizId}</Button>
         </Container>
     );
 }
