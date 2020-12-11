@@ -12,6 +12,7 @@ const Start = () => {
     let answers = ["2", "3", "no clue", "x"];
     let correctAnswer = "3";
     let winners = [{name: "Maya", score:208}, {name: "Joe", score:200}, {name: "Tom", score:195}]
+    let imageUrl = "https://www.jochen-schweizer.de/on/demandware.static/-/Sites-Class/default/dwdf47d577/products/extragross/lama-trekking-1.jpg"
 
     return (
         <Container>
@@ -24,7 +25,7 @@ const Start = () => {
              
              {/*Should show the nth question */}
             <Segment>
-                <QuestionAnswersBox question={question} answers={answers} />
+                <QuestionAnswersBox question={question} answers={answers} imageUrl={imageUrl} />
             </Segment>
 
             {/*Show correct answer  */}
