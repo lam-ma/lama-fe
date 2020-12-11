@@ -37,8 +37,12 @@ const Start = () => {
 
             <Segment>
                 <Header as='h1'>The Winners of the game are...</Header>
+                <br />
+                <br />
+                <br />
+                <Winners winners={winners}/>
             </Segment>
-            <Winners winners={winners}/>
+            
 
         </Container>
     );
