@@ -1,15 +1,12 @@
 import React from 'react';
 import 'semantic-ui-css/semantic.min.css';
-import StartButton from './Pages/StartQuiz/index';
 import './App.css';
+import MainRouter from "./Routes";
 
 function App() {
   return (
     <div className="App">
-        <p>
-          Quizzing time!
-        </p>
-        <StartButton />
+        <MainRouter />
     </div>
   );
 }
