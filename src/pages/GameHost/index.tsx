@@ -5,9 +5,12 @@ import {RouteGameHostParams} from "../../types/RouteGameHostParams";
 import QuestionAnswersBox from '../../Components/QuestionAnswerBox';
 import Answer from '../../Components/Answer';
 import Winners from '../../Components/Winners';
+import {useGameHost} from "./useGameHose";
 
 const Start = () => {
     let {gameId} = useParams<RouteGameHostParams>();
+    const { setGameState, quiz, getCurrentQuestion } = useGameHost({game_id: gameId});
+
     let question = "What is 1 + 2?";
     let answers = ["2", "3", "no clue", "x"];
     let correctAnswer = "3";
