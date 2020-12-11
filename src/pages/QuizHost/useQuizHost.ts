@@ -33,7 +33,6 @@ export const useQuizHost: UseQuizHost = ({ quizId }) => {
 
     const startQuizHandler = async () => {
         try {
-            debugger;
             const { game_id } = await startQuiz(quizId);
             history.push(`/game/${game_id}/host`);
         } catch (err) {

@@ -3,10 +3,10 @@ import {Score} from "./Score";
 import {GAME_STATE} from "./GameState";
 
 export interface State {
-    userId?: string;
+    user_id?: string;
     quiz?: Quiz;
-    gameId?: string;
-    questionId?: string;
-    gameState?: GAME_STATE;
+    game_id?: string;
+    question_id?: string;
+    game_state?: GAME_STATE;
     score?: Score[];
 }
