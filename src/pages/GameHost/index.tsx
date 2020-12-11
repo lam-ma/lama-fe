@@ -11,7 +11,7 @@ const Start = () => {
     let question = "What is 1 + 2?";
     let answers = ["2", "3", "no clue", "x"];
     let correctAnswer = "3";
-    let winners = [{name: "Joe", score:200}, {name: "Maya", score:208}, {name: "Tom", score:195}]
+    let winners = [{name: "Maya", score:208}, {name: "Joe", score:200}, {name: "Tom", score:195}]
 
     return (
         <Container>
