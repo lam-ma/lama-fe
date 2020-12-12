@@ -1,5 +1,5 @@
 import {AppContext} from "../../context";
-import {useContext, useEffect} from "react";
+import {useCallback, useContext, useEffect} from "react";
 import {ActionTypes} from "../../types/ActionTypes";
 import {Quiz} from "../../types/Quiz";
 import {GAME_STATE} from "../../types/GameState";
@@ -10,7 +10,7 @@ import {GameResponse} from "../../types/GameResponse";
 import {Answer} from "../../types/Answer";
 
 
-export type UseGameHose = (config: { game_id: string }) => {
+export type UseGameHost = (config: { game_id: string }) => {
     setGameState: (question_id: string, state: GAME_STATE) => void,
     quiz?: Quiz,
     currentQuestion: Question | null,
@@ -20,13 +20,17 @@ export type UseGameHose = (config: { game_id: string }) => {
     isNextQuestion: boolean,
 };
 
-export const useGameHost: UseGameHose = ({game_id}) => {
+export const useGameHost: UseGameHost = ({game_id}) => {
     const {state, dispatch} = useContext(AppContext);
 
-    const getGame = async () => {
-        const { quizz: quiz, current_question_id, state }: GameResponse = await getById(game_id);
-        dispatch({ type: ActionTypes.SET_GAME, quiz, game_state: state, current_question_id, game_id, });
-    };
+
+    const getGame = useCallback(
+        async () => {
+            const { quizz: quiz, current_question_id, state }: GameResponse = await getById(game_id);
+            dispatch({ type: ActionTypes.SET_GAME, quiz, game_state: state, current_question_id, game_id, });
+        },
+        [game_id, dispatch],
+    );
 
     // if not Quiz load the game
     useEffect(() => {
@@ -37,8 +41,7 @@ export const useGameHost: UseGameHose = ({game_id}) => {
                     // TODO handle error
                 });
         }
-
-    }, []);
+    }, [state, getGame]);
 
 
 

@@ -5,7 +5,7 @@ import {RouteGameHostParams} from "../../types/RouteGameHostParams";
 import QuestionAnswersBox from '../../Components/QuestionAnswerBox';
 import Answer from '../../Components/Answer';
 import Winners from '../../Components/Winners';
-import {useGameHost} from "./useGameHose";
+import {useGameHost} from "./useGameHost";
 
 const Start = () => {
     let {gameId} = useParams<RouteGameHostParams>();
