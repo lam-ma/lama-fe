@@ -29,7 +29,7 @@ export const useQuizHost: UseQuizHost = ({quizId}) => {
                 //TODO Handle server error
             }
         }
-    }, [state]);
+    }, [state, getQuiz]);
 
     const startQuizHandler = async () => {
         try {
