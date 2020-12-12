@@ -1,13 +1,17 @@
 import React from 'react'
 import {Message, Image} from 'semantic-ui-react'
 import Answer from '../../Components/Answer'
-type QAProps = {question: string, answers: string[], imageUrl: string}
+import { Answer as AnswerType } from "../../types/Answer";
+
+type QAProps = {description?: string, answers: AnswerType[], imageUrl?: string}
 const QuestionAnswersBox = (props: QAProps) => (
     <>
         <Message size='massive' color="teal">
             <Message.Header>
-                <Image src={props.imageUrl} wrapped ui={false} />
-                {props.question}
+                {props.imageUrl &&
+                    <Image src={props.imageUrl} wrapped ui={false}/>
+                }
+                {props.description}
             </Message.Header>
         </Message>
         {props.answers.map((answer) => {

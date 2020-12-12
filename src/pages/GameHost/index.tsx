@@ -9,13 +9,10 @@ import {useGameHost} from "./useGameHose";
 
 const Start = () => {
     let {gameId} = useParams<RouteGameHostParams>();
-    const { setGameState, quiz, getCurrentQuestion } = useGameHost({game_id: gameId});
+    const { currentQuestion, gameState, correctAnswers, nextStateHandler, isNextQuestion } = useGameHost({game_id: gameId});
 
-    let question = "What is 1 + 2?";
-    let answers = ["2", "3", "no clue", "x"];
-    let correctAnswer = "3";
+    // Winners Mock
     let winners = [{name: "Maya", score:208}, {name: "Joe", score:200}, {name: "Tom", score:195}]
-    let imageUrl = "https://www.jochen-schweizer.de/on/demandware.static/-/Sites-Class/default/dwdf47d577/products/extragross/lama-trekking-1.jpg"
 
     return (
         <Container>
@@ -23,29 +20,54 @@ const Start = () => {
                 Host page in-game for {gameId}
             </Header>
 
-            <Button>Show Answers</Button>
+            {gameState !== "FINISH" &&
+                <Button onClick={nextStateHandler}>
+                    {gameState === "QUESTION" &&
+                    "Show Answer"
+                    }
+                    {gameState === "ANSWER" && isNextQuestion &&
+                    "Show Next Question"
+                    }
+                    {!isNextQuestion && gameState === "ANSWER" && currentQuestion &&
+                    "Show Results"
+                    }
+                </Button>
+            }
 
              
              {/*Should show the nth question */}
-            <Segment>
-                <QuestionAnswersBox question={question} answers={answers} imageUrl={imageUrl} />
-            </Segment>
+            {(gameState === "QUESTION" || gameState === "ANSWER") &&
+                <Segment>
+                    <QuestionAnswersBox description={currentQuestion?.description} answers={currentQuestion?.answers || []} imageUrl={currentQuestion?.image_url}/>
+                </Segment>
+            }
 
             {/*Show correct answer  */}
-            <Segment>
-                <Header as='h1'>And the right answer is...</Header>
-                <Answer answer={correctAnswer}></Answer>
-            </Segment>
+            {gameState === "ANSWER" &&
+                <Segment>
+                    { correctAnswers?.length === 1 &&
+                        <Header as='h1'>And the right answer is...</Header>
+                    }
+                    { (correctAnswers?.length || 0) > 1 &&
+                        <Header as='h1'>And the right answers are...</Header>
+                    }
+                    {correctAnswers?.length && correctAnswers.map((answer) => (
+                        <Answer answer={answer} />
+                    ))
+                    }
+                </Segment>
+            }
 
             {/*Show Final Results */}
-
-            <Segment>
-                <Header as='h1'>The Winners of the game are...</Header>
-                <br />
-                <br />
-                <br />
-                <Winners winners={winners}/>
-            </Segment>
+            {gameState === "FINISH" &&
+                <Segment>
+                    <Header as='h1'>The Winners of the game are...</Header>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <Winners winners={winners}/>
+                </Segment>
+            }
             
 
         </Container>

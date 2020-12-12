@@ -15,4 +15,5 @@ export type Action =
         quiz: Quiz,
         game_state: GAME_STATE,
         current_question_id: string,
+        game_id?: string,
     }

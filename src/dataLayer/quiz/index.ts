@@ -1,6 +1,7 @@
 import {Quiz} from "../../types/Quiz";
 import axios from "axios";
 import { BE_URL } from "../../config";
+import {StartGameResponse} from "../../types/StartGameResponse";
 
 export const getById = async (id: string): Promise<Quiz> => {
     try {
@@ -13,9 +14,9 @@ export const getById = async (id: string): Promise<Quiz> => {
     }
 }
 
-export const startQuiz = async (id: string): Promise<{ game_id: string }> => {
+export const startQuiz = async (id: string): Promise<StartGameResponse> => {
     try {
-        const response = await axios.post<{ game_id: string }>(`${BE_URL}/quizzes/${id}/start`);
+        const response = await axios.post<StartGameResponse>(`${BE_URL}/quizzes/${id}/start`);
         return response.data;
     } catch (err) {
         // TODO handle error

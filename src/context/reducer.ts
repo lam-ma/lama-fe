@@ -17,12 +17,13 @@ export const reducer = (state: State, action: Action) => {
             }
         }
         case ActionTypes.SET_GAME: {
-            const {quiz, game_state, current_question_id} = action;
+            const {quiz, game_state, current_question_id, game_id} = action;
             return {
                 ...state,
                 quiz,
                 game_state,
-                question_id: current_question_id,
+                question_id: current_question_id ?? state.question_id,
+                game_id: game_id ?? state.game_id,
             };
         }
         default:
